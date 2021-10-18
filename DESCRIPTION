@@ -19,20 +19,7 @@ Depends:
 Imports:
     Biostrings, 
     ggplot2,
-    magrittr,
-    tidyr,
-    utils,
-    stats,
-    aplot,
-    RColorBrewer,
-    ggalt,
-    ggforce,
-    dplyr,
-    R4RNA,
-    grDevices,
-    seqmagick,
-    grid,
-    methods
+    ggmsa
 Suggests: 
     knitr,
     rmarkdown,
@@ -41,14 +28,12 @@ Suggests:
     ggtree,
     ape,
     cowplot,
-    BiocStyle,
     readxl,
     ggnewscale,
     kableExtra,
     gggenes,
-    testthat,
     phangorn
-URL: https://nyzhoulang.github.io/ggmsaBioWorkshop2021/
+URL: https://github.com/YuLab-SMU/ggmsa
 BugReports: https://github.com/nyzhoulang/ggmsaBioWorkshop2021/issues
 VignetteBuilder: knitr
 DockerImage: nyzhoulang/ggmsaworkshop
