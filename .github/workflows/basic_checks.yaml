@@ -2,7 +2,7 @@ on: [push, pull_request]
 
 env:
   cache-version: v1
-  repo-name: nyzhoulang/ggmsaworkshop
+  repo-name: nyzhoulang/ggmsabioworkshop2021
 
 jobs:
   job1:
