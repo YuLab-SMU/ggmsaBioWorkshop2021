@@ -1,12 +1,10 @@
-Package: BuildABiocWorkshop
-Title: Bioconductor Workshop Template and Github Actions
+Package: ggmsaABiocWorkshop2021
+Title: Plot Multiple Sequence Alignment using 'ggplot2'
 Version: 0.9.0
-Authors@R: 
-    person(given = "Sean",
-           family = "Davis",
-           role = c("aut", "cre"),
-           email = "seandavi@gmail.com",
-           comment = c(ORCID = "your-orc-id-here"))
+Authors@R: c(person("Lang", "Zhou",      email = "nyzhoulang@gmail.com",    role = c("aut", "cre")),
+             person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "ths"), comment = c(ORCID = "0000-0002-6485-8781")),
+             person("Shuangbin", "Xu",   email = "xshuangbin@163.com",      role = "ctb"),
+             person("Huina", "Huang",    email = "1185796994@qq.com",       role = "ctb"))
 Description: This package serves as a template for using github actions to 
     prepare a Bioconductor Workshop package for use. In particular,
     a pkgdown website and docker image are generated based on workflow 
@@ -18,11 +16,39 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Depends: 
     Biobase
+Imports:
+    Biostrings, 
+    ggplot2,
+    magrittr,
+    tidyr,
+    utils,
+    stats,
+    aplot,
+    RColorBrewer,
+    ggalt,
+    ggforce,
+    dplyr,
+    R4RNA,
+    grDevices,
+    seqmagick,
+    grid,
+    methods
 Suggests: 
     knitr,
     rmarkdown,
     pkgdown
-URL: https://seandavi.github.io/BuildABiocWorkshop/
-BugReports: https://github.com/seandavi/BuildABiocWorkshop/issues/new/choose
+    ggtreeExtra,
+    ggtree (>= 1.17.1),
+    ape,
+    cowplot,
+    BiocStyle,
+    readxl,
+    ggnewscale,
+    kableExtra,
+    gggenes,
+    testthat (>= 3.0.0),
+    phangorn
+URL: http://yulab-smu.top/ggmsa/
+BugReports: https://github.com/YuLab-SMU/ggmsa/issues
 VignetteBuilder: knitr
 DockerImage: seandavi/buildabiocworkshop:latest

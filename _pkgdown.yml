@@ -6,7 +6,7 @@ template:
     #ganalytics: UA-99999999-9
 
 home:
-  title: "BuildABiocWorkshop"
+  title: "Visualization and exploration of MSAs and associated data with ggmsa"
   type: inverse
 
 
