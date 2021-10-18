@@ -1,11 +1,10 @@
 Package: ggmsaABiocWorkshop2021
 Title: ggmsa workshop
 Version: 0.9.0
-Authors@R: c(
-    person(given ="Lang", 
-    family ="Zhou",      
-    email = "nyzhoulang@gmail.com",    
-    role = c("aut", "cre"))
+Authors@R: c(person("Lang", "Zhou",      email = "nyzhoulang@gmail.com",    role = c("aut", "cre")),
+             person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "ths"), comment = c(ORCID = "0000-0002-6485-8781")),
+             person("Shuangbin", "Xu",   email = "xshuangbin@163.com",      role = "ctb"),
+             person("Huina", "Huang",    email = "1185796994@qq.com",       role = "ctb"))
 Description: This package serves as a template for using github actions to 
     prepare a Bioconductor Workshop package for use. In particular,
     a pkgdown website and docker image are generated based on workflow 
