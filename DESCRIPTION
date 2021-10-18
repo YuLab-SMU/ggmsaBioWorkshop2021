@@ -36,9 +36,9 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    pkgdown
+    pkgdown,
     ggtreeExtra,
-    ggtree (>= 1.17.1),
+    ggtree,
     ape,
     cowplot,
     BiocStyle,
@@ -46,9 +46,9 @@ Suggests:
     ggnewscale,
     kableExtra,
     gggenes,
-    testthat (>= 3.0.0),
+    testthat,
     phangorn
-URL: http://yulab-smu.top/ggmsa/
-BugReports: https://github.com/YuLab-SMU/ggmsa/issues
+URL: https://nyzhoulang.github.io/ggmsaBioWorkshop2021/
+BugReports: https://github.com/nyzhoulang/ggmsaBioWorkshop2021/issues
 VignetteBuilder: knitr
-DockerImage: seandavi/buildabiocworkshop:latest
+DockerImage: nyzhoulang/ggmsaworkshop

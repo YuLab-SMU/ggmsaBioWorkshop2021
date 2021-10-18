@@ -1,4 +1,4 @@
-url: https://seandavi.github.io/BuildABiocWorkshop
+url: https://nyzhoulang.github.io/ggmsaBioWorkshop2021/
 
 template:
   params:
@@ -13,6 +13,6 @@ home:
 navbar:
   right:
    - icon: fa-github
-     href: https://github.com/seandavi/BuildABiocWorkshop
+     href: https://github.com/nyzhoulang/ggmsaBioWorkshop2021
      
 
