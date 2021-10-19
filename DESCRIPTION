@@ -23,4 +23,4 @@ Suggests:
 URL: https://nyzhoulang.github.io/ggmsaBioWorkshop2021/
 BugReports: https://github.com/nyzhoulang/ggmsaBioWorkshop2021/issues
 VignetteBuilder: knitr
-DockerImage: nyzhoulang/ggmsabioworkshop2021:latest
+DockerImage: nyzhoulang/ggmsabioworkshop2021
