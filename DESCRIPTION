@@ -17,7 +17,7 @@ RoxygenNote: 7.1.0
 Depends: 
     Biobase
 Imports:
-    ggmsa
+    ggmsa,
     ggplot2
 Suggests: 
     knitr,
