@@ -1,0 +1,3 @@
+>strand_7
+gUCUACGGCCAUACCACCCUGAACGCGCCCGAUCUCGUCUGAUCUCGGAAGCUAAGCAGGGUCGGGCCUGGUUAGUACUUGGAUGGGAGACCGCCUGGGAAUACCGGGUGCUGUAGGCUU
+((((((.......((((((((.....((((((...(....)...))))..))....)))))).))((((((......((.((..((....)).)).)).....))))))...))))))..
