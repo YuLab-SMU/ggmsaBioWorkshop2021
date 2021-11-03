@@ -64,74 +64,84 @@ library(dplyr)
 #  背景介绍
 
 ##  摘要 
-在多序列比对(Multiple Sequence Alignment,MSA)的可视化中，普遍采用堆叠可视化的形
-式，其以行表示每条序列，以列表示相同位置的不同残基字符。我们开发的R包ggmsa在
-可视化层面扩展了这种堆叠形式的可视化方法，使得MSA图形可以与各类数据进行整合。
-例如：允许将序列二级结构信息、基因座位点信息或表型数据等序列相关的数据集与MSA结
-合，以此来探索序列-结构-功能三者之间的关系。并且，我们还开发和整合多种特别的
-比对序列可视化方法，包核苷酸差异图、核苷酸相似性图 (鉴定序列重组信号)、
-序列集束(Sequence Bundles)和序列标识(Sequence Logos)，
-这允许用户从不同角度探索序列的特征。
-
-##  生物学问题描述
-
-###  issues 1 
-
-单一的可视化方法不能满足挖掘更多序列特征的要求
-
-例如：最常用的堆叠模式方法也不能适用于所有情况：
-```{r, fig.height = 3, fig.width = 11, message=FALSE, warning=FALSE, dpi=300, echo=FALSE}
-protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
-ggmsa(protein_sequences, 
-      start = 221, 
-      end = 280, 
-      char_width = 0.5,
-      seq_name = TRUE,
-      border = NA)
-```
-
-堆叠图形在展示局部MSA时有很大优势，它以精确到单核苷酸/氨基酸水平的分辨率展示比对，
-并通过染色让用户能快速识别MSA的变化趋势。
+多序列比对(Multiple Sequence Alignment,MSA)常被用于探索比对序列中的保守区域和变
+异区域。而堆叠图形(Stacked Graphs)是在探索过程中最常用的可视化方式。其以行表示
+每条序列，以列表示相同位置的不同残基字符。我们开发的R包`ggmsa`扩展了这种堆叠形
+式的可视化方法，并添加了更多可视化方法使用户能更好的观测到MSA的保守区域和变异区
+域。另外，`ggmsa`结合`ggtree`和`ggtreeExtra`，可以在大分子层面，观察MSA与表型的
+联系。总之，`ggmsa`可以为用户提供的更多的可视化手段，允许用户从不同角度探索序列
+特征。
 
 
-```{r,  fig.height = 6, fig.width = 10, message=FALSE, warning=FALSE, dpi=300, echo=FALSE}
-ggmsa("data/PlantMITERepeatMask.fa", 
-      font = NULL, 
-      start = 200,
-      end = 300,
-      seq_name = F,
-      border = NA,
-      color = "Chemistry_NT") + 
-    coord_cartesian()
-```
+##  ggmsa的应用场景
+
+###  保守和变异位点的可视化（位点水平）
+
+1.MSA中的保守区域:
+
++ Sequence Bundles
++ Sequence Logos
++ Stacked MSA `+` Annotations
 
 
-但是当比对序列比较大并且比较复杂时，图形会包含密集的字符和令人眼花缭乱的配色。
-会让人产生视觉上的混乱感。
+2.序列中的特殊变异区域
 
-###  issues 2
-现有工具缺乏同时探索MSA和相关数据的能力（序列-结构-功能之间的联系）。
++ Sequence recombination
 
+<!-- 例如：最常用的堆叠模式方法也不能适用于所有情况： -->
+<!-- ```{r, fig.height = 3, fig.width = 11, message=FALSE, warning=FALSE, dpi=300, echo=FALSE} -->
+<!-- protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa") -->
+<!-- ggmsa(protein_sequences,  -->
+<!--       start = 221,  -->
+<!--       end = 280,  -->
+<!--       char_width = 0.5, -->
+<!--       seq_name = TRUE, -->
+<!--       border = NA) -->
+<!-- ``` -->
+
+<!-- 堆叠图形在展示局部MSA时有很大优势，它以精确到单核苷酸/氨基酸水平的分辨率展示比对， -->
+<!-- 并通过染色让用户能快速识别MSA的变化趋势。 -->
+
+
+<!-- ```{r,  fig.height = 6, fig.width = 10, message=FALSE, warning=FALSE, dpi=300, echo=FALSE} -->
+<!-- ggmsa("data/PlantMITERepeatMask.fa",  -->
+<!--       font = NULL,  -->
+<!--       start = 200, -->
+<!--       end = 300, -->
+<!--       seq_name = F, -->
+<!--       border = NA, -->
+<!--       color = "Chemistry_NT") +  -->
+<!--     coord_cartesian() -->
+<!-- ``` -->
+
+
+<!-- 但是当比对序列比较大并且比较复杂时，图形会包含密集的字符和令人眼花缭乱的配色。 -->
+<!-- 会让人产生视觉上的混乱感。 -->
+
+###  探索MSA和大分子功能的相关性（分子水平）
+ 
++ Tree + MSA + Phenotypes
+
+序列，结构，功能是相互联系，相互影响的，基因组的变异可能可以解释表型的变异。
+MSA可视化使基因组位点变异信息在视觉上被观测到；基因位置变异信息可以以箭头表示，
+其他表型信息也可以用各种可视化方法表示出来。于是，从在可视化层面的将他们结合起来
+是完全可行的。这我们可以在可视化层面观察到的序列变异与特殊表型的关联。
 ![](images/issus2.png#pic_center)
 
-因为序列，结构，功能是相互联系，相互影响的。所以我们在探索MSA的序列特征时，
-往往试图深入研究序列的系统发育关系和结构功能关系。但是这在可视化层面就无法完成,
-我们没有办法在绘图时把序列和其他数据联系起来。
-
-
-#  使用ggmsa探索MSA和相关数据
 
 ##  ggmsa的技术路线
 ![](images/pipeline.png#pic_center)
 
-ggmsa通过两种方案来解决上面的问题。
-首先，单一的可视化方法无法得到令人满意的可视化方法，因此ggmsa开发并整合多种
-通用的序列可视化方法。用户提供了更多可视化手段来从不同角度探索序列数据。
 
-其次，ggmsa 拓展了普通的堆叠模式图形，使得外部数据可以对齐到MSA的行或者列上，实现
-在可视化层面同时探索序列和相关数据。
+ggmsa中的众多可视化方法主要执行两大功能：
 
-##  使用不同的可视化方法
++ 在单核苷酸/氨基酸水平更好的展示MSA的保守区域和变异区域；
++ 在分子水平的观察MSA和相关数据的联系；
+
+
+#  示例演示
+
+##  使用不同的可视化方法探索MSA的保守性
 
 ###  堆叠图形
 
@@ -185,7 +195,6 @@ ggmsa(protein_sequences,
 ```{r  echo=FALSE, results='asis', warning=FALSE, message=FALSE}  
 
 x <- "geom_seqlogo()\tgeometric layer\tautomatically generated sequence logos for a MSA\n
-geom_GC()\tannotation module\tshows GC content with bubble chart\n
 geom_seed()\tannotation module\thighlights seed region on miRNA sequences\n
 geom_msaBar()\tannotation module\tshows sequences conservation by a bar chart\n
 geom_helix()\tannotation module\tdepicts RNA secondary structure as arc diagrams(need extra data)\n
@@ -204,6 +213,51 @@ knitr::kable(y, align = "l", booktabs = TRUE, escape = TRUE) %>%
 ```
 
 
+注释模块还可以接收外部数据。RNA的二级结构可以以弧线图的形式添加到MSA。
+弧线连接的两个MSA位置表示在结构上是配对的。
+
+使用`ggmsa() + geom_helix()`的模式可以将二级结构数据整合到MSA图形中。
+```{r  fig.height = 14, fig.width = 10, warning=FALSE}
+RNA7S  <- "data/3JAJ-2D-dotbracket.txt"
+RNAP54 <- "data/4UJE-2D-dotbracket.txt"
+
+RF03120_msa<- system.file("extdata", "Rfam", "RF03120.fasta", package = "ggmsa")
+RF03120_ss <- system.file("extdata", "Rfam", "RF03120_SS.txt", package = "ggmsa")
+
+known <- readSSfile(RNA7S, type = "Vienna" )
+transat <- readSSfile(RNAP54 , type = "Vienna")
+
+
+RF_arc <- readSSfile(RF03120_ss, type = "Vienna" )
+
+p7A <- ggmsa(RF03120_msa, 
+             font = NULL, 
+             color = "Chemistry_NT", 
+             seq_name = F, 
+             show.legend = F, 
+             border = NA) +
+        geom_helix(helix_data = RF_arc) + 
+        theme(axis.text.y = element_blank())
+
+p7B <- ggmsa("data/5SRNA.fa",
+             font = NULL,
+             color = "Chemistry_NT",
+             seq_name = T,
+             show.legend = T,
+             border = NA) +
+  geom_helix(helix_data = list(known = known, 
+                               predicted = transat),
+             overlap = F)
+
+p7 <- plot_list(gglist = list(p7A, p7B), 
+                ncol = 1,
+                heights = c(0.15), 
+                tag_levels = 'A') 
+p7
+```
+
+
+###  堆叠图形中的布局
 
 除了不同的注释图层，我们还为堆叠图形设计不同的布局
 ```{r facet, fig.height = 6, fig.width = 10, message=FALSE, warning=FALSE}
@@ -211,6 +265,8 @@ knitr::kable(y, align = "l", booktabs = TRUE, escape = TRUE) %>%
  ggmsa(protein_sequences, start = 0, end = 400, font = NULL, color = "Chemistry_AA") + 
     facet_msa(field = 100)
 ```
+
+
 
 
 ###  Sequence bundle 
@@ -226,7 +282,7 @@ knitr::include_graphics("images/seq_bundle.png")
 ggmsa中用`ggSeqBundle`函数来把MSA可视化为Sequence bundles.最简单的方法是
 `ggSeqBundle(msa-data)`。
 
-下列数据包括革兰氏阴性菌和革兰氏阴性菌的腺苷酸激酶盖(Adenylate Kinase Lid, AKL)
+下列数据包括革兰氏阳性菌和革兰氏阴性菌的腺苷酸激酶盖(Adenylate Kinase Lid, AKL)
 结构域。每组各100条序列。
 ```{r echo=FALSE, fig.height=5.5, fig.width=11, message=FALSE}
 negative <-  system.file("extdata", "Gram-negative_AKL.fasta", 
@@ -278,11 +334,11 @@ ggmsa中的Sequence logo可以作为注释图层添`geom_seqlogo`添加到堆叠
  seqlogo(protein_sequences, 221, 280)
 ```
 
+##  序列的中特殊的变异
 
-###  Sequence recombination
 
-除了通用的可视化方法,ggmsa还设计专门的可视化方法来鉴定序列中的特殊属性。
-比如鉴定潜在序列中的重组信号。
+除了通过可视化方法探索MSA的保守性,`ggmsa`还设计专门的可视化方法来观测序列中特殊
+的变异位点。为鉴定序列中的潜在的重组信号提供线索。
 ```{r, echo=FALSE, out.width = "30%",out.height='50%', fig.align='center'}
 knitr::include_graphics("images/recombination.png")
 ```
@@ -303,14 +359,11 @@ plot_list(gglist=plts, ncol=1, tag_levels = list(c("A",' ',"B", ' ',"C", ' ', "D
 ```
 
 
-##  拓展Stacked MSA
+##  探索MSA和相关数据的联系
 
-外部数据可以被整合到堆叠图形的行或列中：
+通过`ggtree`或者`ggtreeExtra`分面功能，形成Tree-MSA-External 的图形结构，
+从可视化的角度观察MSA和特殊的表型之间的联系。
 ![](images/Fig2.png)
-
-###  对齐到行
-
-通过`ggtree`或者`ggtreeExtra`可以形成Tree-MSA-Others的图形结构。
 
 通过`ggtree(tree) + geom_facet(geom_msa) + geom_facet(ohters)`或者
 `ggtree(tree) + geom_fruit(geom_msa) + geom_fruit(others)`的代码模式来整合外部
@@ -361,50 +414,6 @@ p6A <- facet_widths(p6a, c(Tree = 0.35, Genome_Locus = 0.3))
 p6A
 ```
 
-###  对齐到列
-
-对齐的MSA列的数据一般是结构数据。RNA的二级结构可以以弧线图的形式添加到MSA。
-弧线连接的两个MSA位置表示在结构上是配对的。
-
-使用`ggmsa() + geom_helix()`的模式可以将二级结构数据整合到MSA图形中。
-```{r  fig.height = 14, fig.width = 10, warning=FALSE}
-RNA7S  <- "data/3JAJ-2D-dotbracket.txt"
-RNAP54 <- "data/4UJE-2D-dotbracket.txt"
-
-RF03120_msa<- system.file("extdata", "Rfam", "RF03120.fasta", package = "ggmsa")
-RF03120_ss <- system.file("extdata", "Rfam", "RF03120_SS.txt", package = "ggmsa")
-
-known <- readSSfile(RNA7S, type = "Vienna" )
-transat <- readSSfile(RNAP54 , type = "Vienna")
-
-
-RF_arc <- readSSfile(RF03120_ss, type = "Vienna" )
-
-p7A <- ggmsa(RF03120_msa, 
-             font = NULL, 
-             color = "Chemistry_NT", 
-             seq_name = F, 
-             show.legend = F, 
-             border = NA) +
-        geom_helix(helix_data = RF_arc) + 
-        theme(axis.text.y = element_blank())
-
-p7B <- ggmsa("data/5SRNA.fa",
-             font = NULL,
-             color = "Chemistry_NT",
-             seq_name = T,
-             show.legend = T,
-             border = NA) +
-  geom_helix(helix_data = list(known = known, 
-                               predicted = transat),
-             overlap = F)
-
-p7 <- plot_list(gglist = list(p7A, p7B), 
-                ncol = 1,
-                heights = c(0.15), 
-                tag_levels = 'A') 
-p7
-```
 
 
 #  总结
