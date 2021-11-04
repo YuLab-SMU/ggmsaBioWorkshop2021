@@ -75,7 +75,7 @@ library(dplyr)
 
 ##  ggmsa的应用场景
 
-###  保守和变异位点的可视化（位点水平）
+###  MSA保守和变异位点的可视化
 
 1.MSA中的保守区域:
 
@@ -86,7 +86,7 @@ library(dplyr)
 
 2.序列中的特殊变异区域
 
-+ Sequence recombination
++ Sequence Recombination
 
 <!-- 例如：最常用的堆叠模式方法也不能适用于所有情况： -->
 <!-- ```{r, fig.height = 3, fig.width = 11, message=FALSE, warning=FALSE, dpi=300, echo=FALSE} -->
@@ -280,10 +280,13 @@ knitr::include_graphics("images/seq_bundle.png")
 ```
 
 ggmsa中用`ggSeqBundle`函数来把MSA可视化为Sequence bundles.最简单的方法是
-`ggSeqBundle(msa-data)`。
+`ggSeqBundle(msa_data)`。
 
 下列数据包括革兰氏阳性菌和革兰氏阴性菌的腺苷酸激酶盖(Adenylate Kinase Lid, AKL)
 结构域。每组各100条序列。
+阳性菌在形成半胱氨酸(Cystine)四联体；阴性菌形成氢键网络，
+(His4, Ser7, Arg9, Asp24, Thr27, Glu29)
+
 ```{r echo=FALSE, fig.height=5.5, fig.width=11, message=FALSE}
 negative <-  system.file("extdata", "Gram-negative_AKL.fasta", 
                          package = "ggmsa")
@@ -311,6 +314,7 @@ ggSeqBundle(list(negative, positive),
               size = 4)
 
 ```
+(Date from BioVis2013 and repeated example from [Science Practice](https://www.science-practice.com/projects/sequence-bundles/gallery/))
 
 ###  Sequence logo
 
@@ -329,7 +333,7 @@ ggmsa中的Sequence logo可以作为注释图层添`geom_seqlogo`添加到堆叠
 ```
 
 也可以用`seqlogo`函数进行单独的渲染。使用方法与`ggmsa`相似，可是通过参数控制位置，
-配色和字体。
+配色和字体。`patchwork`包可以把sequqnce logos 和 sequence bundles组合起来。
 ```{r fig.height = 2.5, fig.width = 8, warning = FALSE, message = FALSE}
  seqlogo(protein_sequences, 221, 280)
 ```
