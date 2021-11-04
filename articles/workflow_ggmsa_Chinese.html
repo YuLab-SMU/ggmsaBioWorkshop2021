@@ -124,13 +124,13 @@
 <ul>
 <li>Tree + MSA + Phenotypes</li>
 </ul>
-<p>序列，结构，功能是相互联系，相互影响的，基因组的变异可能可以解释表型的变异。 MSA可视化使基因组位点变异信息在视觉上被观测到；基因位置变异信息可以以箭头表示， 其他表型信息也可以用各种可视化方法表示出来。于是，从在可视化层面的将他们结合起来 是完全可行的。这我们可以在可视化层面观察到的序列变异与特殊表型的关联。 <img src="images/issus2.png#pic_center"></p>
+<p>序列，结构，功能是相互联系，相互影响的，基因组的变异可能可以解释表型的变异。 MSA可视化使基因组位点变异信息在视觉上被观测到；基因位置变异信息可以以箭头表示， 其他表型信息也可以用各种可视化方法表示出来。于是，从在可视化层面的将他们结合起来 是完全可行的。这我们可以在可视化层面观察到的序列变异与特殊表型的关联。 <img src="images/issus2.png"></p>
 </div>
 </div>
 <div id="ggmsa的技术路线" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ggmsa%E7%9A%84%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF" class="anchor"></a>ggmsa的技术路线</h2>
-<p><img src="images/pipeline.png#pic_center"></p>
+<p><img src="images/pipeline.png"></p>
 <p>ggmsa中的众多可视化方法主要执行两大功能：</p>
 <ul>
 <li>在单核苷酸/氨基酸水平更好的展示MSA的保守区域和变异区域；</li>
@@ -153,7 +153,7 @@ plot
 </summary><p><img src="images/stacked_MSA.png" width="30%" style="display: block; margin: auto;"></p>
 </details><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">protein_sequences</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample.fasta"</span>, package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
-<span class="fu">readAAMultipleAlignment</span><span class="op">(</span><span class="va">protein_sequences</span><span class="op">)</span> </code></pre></div>
+<span class="fu">readAAMultipleAlignment</span><span class="op">(</span><span class="va">protein_sequences</span><span class="op">)</span> <span class="co">#苯丙氨酸羟化酶蛋白</span></code></pre></div>
 <details><summary>
 output
 </summary><pre><code>#&gt; AAMultipleAlignment with 9 rows and 456 columns
@@ -345,6 +345,31 @@ plot
 </summary><p><img src="images/seq_bundle.png" width="30%" style="display: block; margin: auto;"></p>
 </details><p>ggmsa中用<code>ggSeqBundle</code>函数来把MSA可视化为Sequence bundles.最简单的方法是 <code>ggSeqBundle(msa_data)</code>。</p>
 <p>下列数据包括革兰氏阳性菌和革兰氏阴性菌的腺苷酸激酶盖(Adenylate Kinase Lid, AKL) 结构域。每组各100条序列。 阳性菌在形成半胱氨酸(Cystine)四联体；阴性菌形成氢键网络， (His4, Ser7, Arg9, Asp24, Thr27, Glu29)</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">negative</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"Gram-negative_AKL.fasta"</span>, 
+                         package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
+<span class="va">positive</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"Gram-positive_AKL.fasta"</span>, 
+                         package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
+
+<span class="va">pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">9</span>, <span class="fl">24</span>, <span class="fl">27</span>, <span class="fl">29</span>,
+                       <span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">24</span>, <span class="fl">27</span><span class="op">)</span>, 
+                  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">21</span>, <span class="fl">11</span>, <span class="fl">20</span>, <span class="fl">17</span>, <span class="fl">12</span>, <span class="fl">18</span><span class="op">)</span> <span class="op">+</span><span class="fl">.3</span>,
+                        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">13</span>, <span class="fl">13</span>, <span class="fl">13</span>, <span class="fl">13</span><span class="op">)</span> <span class="op">+</span><span class="fl">.5</span>
+                        <span class="op">)</span>, 
+                  label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"H"</span>, <span class="st">"S"</span>, <span class="st">"R"</span>, <span class="st">"D"</span>, <span class="st">"T"</span>, <span class="st">"E"</span>,
+                            <span class="st">"C"</span>, <span class="st">"C"</span>, <span class="st">"C"</span>, <span class="st">"C"</span><span class="op">)</span>,
+                  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"#ff4700"</span>,<span class="fl">6</span><span class="op">)</span>, 
+                            <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"#0443d0"</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu">ggSeqBundle</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">negative</span>, <span class="va">positive</span><span class="op">)</span>, 
+            alpha <span class="op">=</span> <span class="fl">0.1</span>, 
+            bundle_color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#FC8D62"</span>,<span class="st">"#8DA0CB"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="co">#RColorBrewer: Set2:2-3</span>
+    <span class="fu">geom_text</span><span class="op">(</span>data <span class="op">=</span> <span class="va">pos</span>, 
+              mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, 
+                            label <span class="op">=</span> <span class="va">label</span>, 
+                            color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">color</span><span class="op">)</span><span class="op">)</span>,
+              inherit.aes <span class="op">=</span> <span class="cn">FALSE</span>, 
+              size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <details><summary>
 plot
 </summary><p><img src="workflow_ggmsa_Chinese_files/figure-html/unnamed-chunk-9-1.png" width="1056"></p>
@@ -358,14 +383,14 @@ plot
 plot
 </summary><p><img src="images/seq_logo.png" width="30%" style="display: block; margin: auto;"></p>
 </details><p>ggmsa中的Sequence logo可以作为注释图层添<code>geom_seqlogo</code>添加到堆叠图形中。</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="fu">ggmsa</span><span class="op">(</span><span class="va">protein_sequences</span>, <span class="fl">221</span>, <span class="fl">280</span>, seq_name <span class="op">=</span> <span class="cn">TRUE</span>, char_width <span class="op">=</span> <span class="fl">0.5</span>, font <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">geom_seqlogo</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Chemistry_AA"</span><span class="op">)</span> </code></pre></div>
 <details><summary>
 plot
 </summary><p><img src="workflow_ggmsa_Chinese_files/figure-html/unnamed-chunk-11-1.png" width="1056"></p>
 </details><p>也可以用<code>seqlogo</code>函数进行单独的渲染。使用方法与<code>ggmsa</code>相似，可是通过参数控制位置， 配色和字体。<code>patchwork</code>包可以把sequqnce logos 和 sequence bundles组合起来。</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="fu">seqlogo</span><span class="op">(</span><span class="va">protein_sequences</span>, <span class="fl">221</span>, <span class="fl">280</span><span class="op">)</span></code></pre></div>
 <details><summary>
 plot
@@ -382,7 +407,7 @@ plot
 </summary><p><img src="images/recombination.png" width="30%" height="50%" style="display: block; margin: auto;"></p>
 </details><p>选择一个潜在序列(query)，<code>seqdiff</code>可以计算query和其他序列在每个位置上是否存在 核苷酸差异。并把固定区域的差异数目以柱状图的形式展示(<code>plot(seqdiff)</code>)。</p>
 <p>同理，用<code>simplot</code>函数计算序列间的相似性。例如：<code>CF_YL21</code> vs <code>Mont,Oz and Wilg5</code></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"GVariation"</span>, package<span class="op">=</span><span class="st">"ggmsa"</span><span class="op">)</span>,
                   pattern<span class="op">=</span><span class="st">"fas"</span>, full.names<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">xx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">fas</span>, <span class="va">seqdiff</span><span class="op">)</span>
@@ -401,7 +426,7 @@ plot
 <a href="#%E6%8E%A2%E7%B4%A2msa%E5%92%8C%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE%E7%9A%84%E8%81%94%E7%B3%BB" class="anchor"></a>探索MSA和相关数据的联系</h2>
 <p>通过<code>ggtree</code>或者<code>ggtreeExtra</code>分面功能，形成Tree-MSA-External 的图形结构， 从可视化的角度观察MSA和特殊的表型之间的联系。 <img src="images/Fig2.png"></p>
 <p>通过<code>ggtree(tree) + geom_facet(geom_msa) + geom_facet(ohters)</code>或者 <code>ggtree(tree) + geom_fruit(geom_msa) + geom_fruit(others)</code>的代码模式来整合外部 数据。</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#load MSA and genes locus</span>
 <span class="va">tp53_sequences</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"tp53.fa"</span>, package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
 <span class="va">tp53_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"TP53_genes.xlsx"</span>, package <span class="op">=</span> <span class="st">"ggmsa"</span><span class="op">)</span>
@@ -448,13 +473,14 @@ plot
 <details><summary>
 plot
 </summary><p><img src="workflow_ggmsa_Chinese_files/figure-html/unnamed-chunk-15-1.png" width="1440"></p>
-</details>
+</details><p>可以结合<a href="https://www.ncbi.nlm.nih.gov/clinvar/">ClinVar Search database</a>探索更多的MSA与表型的关系。 <img src="images/ClinVar.png"></p>
 </div>
 </div>
 <div id="总结" class="section level1">
 <h1 class="hasAnchor">
 <a href="#%E6%80%BB%E7%BB%93" class="anchor"></a>总结</h1>
-<p>可视化探索MSA是分子生物学的重要内容，但在堆叠的MSA图形中表现并不佳。我们开发的R 包ggmsa，用于可视化地探索MSA和相关数据。它包含一系列通用MSA可视化方法，并通过将 多个相关数据集成到堆叠MSA图形中，扩展了堆叠MSA可视化方法的使用范围。堆叠的MSA图形 集成多个外部数据，在视觉层面探索序列特征的相关性。因此，将不同类型的外部数据与 MSA相结合，可以观察到不同的相关性。对同一个MSA数据采用多种可视化方法，可以从不同 角度探索序列特征。ggmsa中的sequence logos和sequece bundles能快速识别出MSA中的 sequence pattern和残基相关性。最后的碱基差异性和相似性图谱，用于鉴定序列重组事件。 因此，ggmsa代表了对以前拓展性受限的堆叠可视化方法的和可视化方法应用单一的工具的 实质性改进。</p>
+<p>可视化探索MSA是分子生物学的重要内容，但在堆叠的MSA图形中表现并不佳。我们开发的R 包ggmsa，用于可视化地探索MSA和相关数据。它包含一系列通用MSA可视化方法，并通过将 多个相关数据集成到堆叠MSA图形中，扩展了堆叠MSA可视化方法的使用范围。堆叠的MSA图形 集成多个外部数据，在视觉层面探索序列特征的相关性。因此，将不同类型的外部数据与 MSA相结合，可以观察到不同的相关性。对同一个MSA数据采用多种可视化方法，可以从不同 角度探索序列特征。ggmsa中的sequence logos和sequece bundles能快速识别出MSA中的 sequence pattern和残基相关性。最后的碱基差异性和相似性图谱，用于鉴定序列重组事件。 因此，ggmsa代表了对以前拓展性受限的堆叠可视化方法的和可视化方法应用单一的工具的 实质性改进。(<a href="https://yulab-smu.top/" class="uri">https://yulab-smu.top/</a>)</p>
+<p><img src="images/pipeline.png"></p>
 <div id="session-information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>8. Session information</h2>
