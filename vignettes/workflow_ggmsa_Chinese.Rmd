@@ -126,11 +126,11 @@ library(dplyr)
 MSA可视化使基因组位点变异信息在视觉上被观测到；基因位置变异信息可以以箭头表示，
 其他表型信息也可以用各种可视化方法表示出来。于是，从在可视化层面的将他们结合起来
 是完全可行的。这我们可以在可视化层面观察到的序列变异与特殊表型的关联。
-![](images/issus2.png#pic_center)
+![](images/issus2.png)
 
 
 ##  ggmsa的技术路线
-![](images/pipeline.png#pic_center)
+![](images/pipeline.png)
 
 
 ggmsa中的众多可视化方法主要执行两大功能：
@@ -155,7 +155,7 @@ knitr::include_graphics("images/stacked_MSA.png")
 
 ```{r, fig.height = 3, fig.width = 11, message=FALSE, warning=FALSE, dpi=300}
 protein_sequences <- system.file("extdata", "sample.fasta", package = "ggmsa")
-readAAMultipleAlignment(protein_sequences) 
+readAAMultipleAlignment(protein_sequences) #苯丙氨酸羟化酶蛋白
 ggmsa(protein_sequences, 
       start = 221, 
       end = 280, 
@@ -287,7 +287,7 @@ ggmsa中用`ggSeqBundle`函数来把MSA可视化为Sequence bundles.最简单的
 阳性菌在形成半胱氨酸(Cystine)四联体；阴性菌形成氢键网络，
 (His4, Ser7, Arg9, Asp24, Thr27, Glu29)
 
-```{r echo=FALSE, fig.height=5.5, fig.width=11, message=FALSE}
+```{r , fig.height=5.5, fig.width=11, message=FALSE}
 negative <-  system.file("extdata", "Gram-negative_AKL.fasta", 
                          package = "ggmsa")
 positive <-  system.file("extdata", "Gram-positive_AKL.fasta", 
@@ -418,6 +418,9 @@ p6A <- facet_widths(p6a, c(Tree = 0.35, Genome_Locus = 0.3))
 p6A
 ```
 
+可以结合[ClinVar Search database](https://www.ncbi.nlm.nih.gov/clinvar/)探索更多的MSA与表型的关系。
+![](images/ClinVar.png)
+
 
 
 #  总结
@@ -430,8 +433,9 @@ MSA相结合，可以观察到不同的相关性。对同一个MSA数据采用�
 角度探索序列特征。ggmsa中的sequence logos和sequece bundles能快速识别出MSA中的
 sequence pattern和残基相关性。最后的碱基差异性和相似性图谱，用于鉴定序列重组事件。
 因此，ggmsa代表了对以前拓展性受限的堆叠可视化方法的和可视化方法应用单一的工具的
-实质性改进。
+实质性改进。(https://yulab-smu.top/)
 
+![](images/pipeline.png)
 
 ## 8. Session information
 
