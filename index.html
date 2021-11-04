@@ -57,13 +57,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/HOWTO_BUILD_WORKSHOP.html">How To Build A Workshop Package</a>
-    </li>
-    <li>
       <a href="articles/workflow_ggmsa_Chinese.html">使用ggmsa可视化和探索多序列比对和相关数据</a>
-    </li>
-    <li>
-      <a href="articles/workshop_example.html">An Example Workshop</a>
     </li>
   </ul>
 </li>
@@ -87,57 +81,120 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="buildabiocworkshop" class="section level1">
+<div id="ggmsa-workshop" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#buildabiocworkshop" class="anchor"></a>BuildABiocWorkshop</h1></div>
-<p>This package is a template for building a Bioconductor workshop. The package includes Github actions to:</p>
-<ol>
-<li>Set up bioconductor/bioconductor_docker:devel on Github resources</li>
-<li>Install package dependencies for your package (based on the <code>DESCRIPTION</code> file)</li>
-<li>Run <code><a href="http://r-lib.github.io/rcmdcheck/reference/rcmdcheck.html">rcmdcheck::rcmdcheck</a></code>
-</li>
-<li>Build a pkgdown website and push it to github pages</li>
-<li>Build a docker image with the installed package and dependencies</li>
-</ol>
-<div id="responsibilities" class="section level2">
+<a href="#ggmsa-workshop" class="anchor"></a>ggmsa workshop</h1></div>
+<div id="overview" class="section level2">
 <h2 class="hasAnchor">
-<a href="#responsibilities" class="anchor"></a>Responsibilities</h2>
-<p>This year, package authors will be primarily responsible for:</p>
-<ol>
-<li>Creating a landing site of their choosing for their workshops (a website). This website should be listed in the <code>DESCRIPTION</code> file as the <code>URL</code>.</li>
-<li>Creating a docker account and image that will contain workshop materials and the installed packages necessary to run those materials. The name of the resulting docker image, including “tag” if desired, should be listed in a non-standard tag, <code>DockerImage:</code> in the <code>DESCRIPTION</code> file.</li>
-</ol>
-<p>Both of those tasks can be accomplished using the Github actions included in this template package. The vignette accompanying this package describes how to accomplish both of these tasks.</p>
-</div>
-<div id="details" class="section level2">
-<h2 class="hasAnchor">
-<a href="#details" class="anchor"></a>Details</h2>
-<p>For detailed instructions, see the <code>How to build a workshop</code> article/vignette.</p>
-</div>
-<div id="results-of-successful-deployment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#results-of-successful-deployment" class="anchor"></a>Results of successful deployment</h2>
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>The stacked alignment graphic that represents all individual sequences as rows and homologous residue positions as columns is used almost universally in the visualization of multiple sequence alignment (MSA). We present the R package ggmsa to extend MSA visualization method via integrating stacked MSAs and associated data. Sequence-related data sets such as secondary structures, genes locus, or phenotype are allowed to combining with MSA for exploring the sequence-structure-function relationship. And we developed and integrated multiple alignment visualization methods such as nucleotide difference plots, nucleotide similarity plots, and sequence bundles to exploring multifaceted sequence features from multiple perspectives.</p>
+<p>The workshop will be organized into two broad sections:</p>
 <ul>
-<li>A working docker image that contains the installed package and dependencies.</li>
-<li>An up-to-date <code>pkgdown</code> website at <a href="https://YOURUSERNAME.github.io/YOURREPOSITORYNAME/" class="uri">https://YOURUSERNAME.github.io/YOURREPOSITORYNAME/</a>
+<li>Visually exploration of Conservation and Variation in MSAs<br>
 </li>
-<li>Docker image will be tagged with <code>latest</code>, <code>sha-XXXXXX</code> where <code>XXXXXX</code> is the hash of the current <code>master</code> commit, and <code>master</code>.</li>
+<li>Visually exploration of MSAs’ associations to phenotypes.</li>
 </ul>
 </div>
-<div id="to-use-the-resulting-image" class="section level2">
+<div id="pre-requisites" class="section level2">
 <h2 class="hasAnchor">
-<a href="#to-use-the-resulting-image" class="anchor"></a>To use the resulting image:</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-e</span> PASSWORD=<span class="op">&lt;</span>choose_a_password_for_rstudio<span class="op">&gt;</span> -p 8787:8787 YOURDOCKERIMAGENAME</span></code></pre></div>
-<p>Once running, navigate to <a href="https://localhost:8787/" class="uri">https://localhost:8787/</a> and then login with <code>rstudio</code>:<code>yourchosenpassword</code>.</p>
-<p>To try with <strong>this</strong> repository docker image:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-e</span> PASSWORD=abc <span class="at">-p</span> 8787:8787 seandavi/buildabiocworkshop2020</span></code></pre></div>
-<p><em>NOTE</em>: Running docker that uses the password in plain text like above exposes the password to others in a multi-user system (like a shared workstation or compute node). In practice, consider using an environment variable instead of plain text to pass along passwords and other secrets in docker command lines.</p>
+<a href="#pre-requisites" class="anchor"></a>Pre-requisites</h2>
+<p>The course is aimed at PhD students, Master’s students, and third &amp; fourth year undergraduate students. Some basic R knowledge is assumed - this is not an introduction to R course. If you are not familiar with the R statistical programming language it is compulsory that you work through an introductory R course before you attend this workshop.</p>
 </div>
-<div id="whatcha-get" class="section level2">
+<div id="r-packages-used" class="section level2">
 <h2 class="hasAnchor">
-<a href="#whatcha-get" class="anchor"></a>Whatcha get</h2>
-<p><a href="https://seandavi.github.io/BuildABiocWorkshop" class="uri">https://seandavi.github.io/BuildABiocWorkshop</a></p>
-<p><img src="https://github.com/seandavi/BuildABiocWorkshop/raw/master/inst/images/dockerhub_result.png" alt="dockerhub"></p>
+<a href="#r-packages-used" class="anchor"></a><em>R</em> packages used</h2>
+<p>The following key R packages will be used:</p>
+<ul>
+<li><code>ggmsa</code></li>
+<li><code>ggplot2</code></li>
+<li><code>phangorn</code></li>
+<li><code>ggtree</code></li>
+<li><code>Biostrings</code></li>
+<li><code>ggnewscale</code></li>
+<li><code>RColorBrewer</code></li>
+<li><code>dplyr</code></li>
+<li><code>gggenes</code></li>
+<li><code>readxl</code></li>
+</ul>
+</div>
+<div id="time-outline" class="section level2">
+<h2 class="hasAnchor">
+<a href="#time-outline" class="anchor"></a>Time outline</h2>
+<table class="table">
+<thead><tr class="header">
+<th>Activity</th>
+<th>Time</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Introduction</td>
+<td>10m</td>
+</tr>
+<tr class="even">
+<td>1.Visually exploration of Conservation and Variation in MSAs</td>
+<td>30m</td>
+</tr>
+<tr class="odd">
+<td>2.Visually exploration of MSAs’ associations to phenotypes.</td>
+<td>10m</td>
+</tr>
+<tr class="even">
+<td>Q &amp; A</td>
+<td>10m</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="workshop-goals-and-objectives" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workshop-goals-and-objectives" class="anchor"></a>Workshop goals and objectives</h2>
+<div id="learning-goals" class="section level3">
+<h3 class="hasAnchor">
+<a href="#learning-goals" class="anchor"></a>Learning goals</h3>
+<ul>
+<li>Learn how to perform ggmsa in R.</li>
+<li>Understand the basic idea of MSA visualizations.</li>
+</ul>
+</div>
+<div id="learning-objectives" class="section level3">
+<h3 class="hasAnchor">
+<a href="#learning-objectives" class="anchor"></a>Learning objectives</h3>
+<ul>
+<li>Get familiar with the package <code>ggmsa</code>
+</li>
+<li>Perform different visualizations methods of MSA.</li>
+</ul>
+</div>
+</div>
+<div id="workshop-package-installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workshop-package-installation" class="anchor"></a>Workshop package installation</h2>
+<div id="guide" class="section level3">
+<h3 class="hasAnchor">
+<a href="#guide" class="anchor"></a>Guide</h3>
+<p>This is necessary in order to reproduce the code shown in the workshop. The workshop is designed for R <code>4.1</code> and can be installed using one of the two ways below.</p>
+</div>
+<div id="via-docker-image" class="section level3">
+<h3 class="hasAnchor">
+<a href="#via-docker-image" class="anchor"></a>Via Docker image</h3>
+<p>If you’re familiar with <a href="https://docs.docker.com/get-docker/">Docker</a> you could use the Docker image which has all the software pre-configured to the correct versions.</p>
+<pre><code>docker run -e PASSWORD=password -p 8787:8787 nyzhoulang/ggmsabioworkshop2021:latest</code></pre>
+<p>Once running, navigate to <a href="http://localhost:8787/" class="uri">http://localhost:8787/</a> and then login with <code>Username:rstudio</code> and <code>Password:password</code>.</p>
+<p>You should see the Rmarkdown file with all the workshop code which you can run.</p>
+</div>
+<div id="via-github" class="section level3">
+<h3 class="hasAnchor">
+<a href="#via-github" class="anchor"></a>Via GitHub</h3>
+<p>Alternatively, you could install the workshop using the commands below in R <code>4.1</code>.</p>
+<pre><code>install.packages('remotes')
+
+# Install workshop package
+remotes::install_github("nyzhoulang/ggmsaBioWorkshop2021", build_vignettes = TRUE)
+
+# To view vignettes
+library(ggmsaBioWorkshop2021)
+browseVignettes("ggmsaBioWorkshop2021")</code></pre>
+</div>
 </div>
 </div>
   </div>
